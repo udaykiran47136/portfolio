@@ -1,4 +1,4 @@
-👋 Hi, I'm Yagnesh Kampamalla
+👋 Hi, I'm Mnadla udaykiran
 
 🎓 Recent Graduate | 💻 Software Developer | 📊 Data Analyst
 
@@ -36,13 +36,13 @@ MongoDB
 
 View my portfolio website:
 
-🔗 https://yagnesh200323.github.io/Portfolio/
+🔗  https://udaykiran47136.github.io/portfolio/
 
 📫 Contact
 
-📧 Email: yqgneshkampamalla@gmail.com
+📧 Email: mandlaudaykiran553@gmail.com
 
-💻 GitHub: https://github.com/Yagnesh200323
+💻 GitHub: https://github.com/
 
 ⭐ Thanks for visiting my profile!
 
