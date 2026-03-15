@@ -42,7 +42,7 @@ View my portfolio website:
 
 📧 Email: mandlaudaykiran553@gmail.com
 
-💻 GitHub:  github.com/udaykiran47136
+💻 GitHub:  https://github.com/
 
 ⭐ Thanks for visiting my profile!
 
