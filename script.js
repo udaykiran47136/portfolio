@@ -1,14 +1,21 @@
-document.querySelectorAll("nav a").forEach(anchor => {
+document.querySelectorAll("nav a").forEach(link => {
 
-anchor.addEventListener("click", function(e){
+  link.addEventListener("click", function (e) {
 
-e.preventDefault();
+    e.preventDefault();
 
-document.querySelector(this.getAttribute("href"))
-.scrollIntoView({
-behavior:"smooth"
-});
+    const targetId = this.getAttribute("href");
+    const targetSection = document.querySelector(targetId);
 
-});
+    if (targetSection) {
+
+      window.scrollTo({
+        top: targetSection.offsetTop - 60,
+        behavior: "smooth"
+      });
+
+    }
+
+  });
 
 });
