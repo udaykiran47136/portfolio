@@ -1,171 +1,380 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandla Uday Kiran | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #f0f0f0; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+      padding: 60px 5% 40px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    header h1 { font-size: 2.8rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    header .tagline { font-size: 1rem; color: #aaa; margin-bottom: 28px; }
+    nav { display: flex; justify-content: center; gap: 2rem; }
+    nav a {
+      color: #ccc; font-weight: 500; font-size: 0.95rem;
+      padding: 6px 14px; border-radius: 6px; transition: 0.2s;
+    }
+    nav a:hover { color: #ff6b35; background: rgba(255,107,53,0.1); }
 
-<title>Mandla Uday Kiran | Portfolio</title>
+    /* ── SECTIONS ── */
+    section { padding: 70px 5%; max-width: 1100px; margin: 0 auto; }
+    section h2 {
+      font-size: 2rem; font-weight: 800; margin-bottom: 30px;
+      color: #fff; position: relative; display: inline-block;
+    }
+    section h2::after {
+      content: ''; display: block; height: 3px; width: 50px;
+      background: #ff6b35; border-radius: 2px; margin-top: 6px;
+    }
 
-<link rel="stylesheet" href="style.css">
+    /* ── ABOUT ── */
+    #about { background: #0f0f0f; max-width: 100%; padding: 70px 5%; }
+    #about .inner { max-width: 1100px; margin: 0 auto; }
+    #about p { color: #bbb; font-size: 1.05rem; max-width: 750px; }
 
+    /* ── SKILLS ── */
+    #skills { background: #111; max-width: 100%; padding: 70px 5%; }
+    #skills .inner { max-width: 1100px; margin: 0 auto; }
+    .skills { display: flex; flex-wrap: wrap; gap: 12px; }
+    .skills div {
+      background: #1e1e1e; border: 1px solid rgba(255,107,53,0.25);
+      color: #eee; padding: 8px 18px; border-radius: 20px;
+      font-size: 0.88rem; font-weight: 500; transition: 0.2s;
+    }
+    .skills div:hover { background: rgba(255,107,53,0.15); border-color: #ff6b35; color: #ff6b35; }
+
+    /* ── PROJECTS GRID ── */
+    #projects { background: #0a0a0a; max-width: 100%; padding: 70px 5%; }
+    #projects .inner { max-width: 1100px; margin: 0 auto; }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    /* ── PROJECT CARD ── */
+    .card {
+      background: #141414;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      border-color: rgba(255,107,53,0.4);
+    }
+    .card img {
+      width: 100%; height: 200px; object-fit: cover;
+      display: block; transition: transform 0.4s;
+    }
+    .card:hover img { transform: scale(1.04); }
+    .card-body { padding: 22px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .card-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; padding: 3px 10px; border-radius: 12px;
+      background: rgba(255,107,53,0.15); color: #ff6b35;
+      border: 1px solid rgba(255,107,53,0.3); width: fit-content;
+    }
+    .card h3 { font-size: 1.2rem; font-weight: 700; color: #fff; }
+    .card p { font-size: 0.9rem; color: #999; line-height: 1.6; flex: 1; }
+
+    /* ── FEATURE LIST ── */
+    .card-features {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+    }
+    .card-features span {
+      font-size: 0.75rem; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 4px 10px; border-radius: 6px; color: #ccc;
+    }
+
+    /* ── TECH TAGS ── */
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .tag {
+      font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+      border-radius: 20px; letter-spacing: 0.03em;
+    }
+    .tag-react   { background: rgba(97,218,251,0.1);  color: #61dafb; }
+    .tag-node    { background: rgba(104,159,56,0.12); color: #7bc67e; }
+    .tag-mongo   { background: rgba(71,162,72,0.12);  color: #5cb85c; }
+    .tag-express { background: rgba(200,200,200,0.08);color: #ccc; }
+    .tag-jwt     { background: rgba(209,0,63,0.1);    color: #fb7185; }
+    .tag-python  { background: rgba(55,118,171,0.15); color: #4ea8de; }
+    .tag-sql     { background: rgba(255,152,0,0.12);  color: #ffb74d; }
+    .tag-powerbi { background: rgba(243,186,47,0.12); color: #f3ba2f; }
+    .tag-html    { background: rgba(228,77,38,0.12);  color: #e87340; }
+    .tag-css     { background: rgba(38,77,228,0.12);  color: #6fa3ef; }
+    .tag-js      { background: rgba(247,223,30,0.1);  color: #f7df1e; }
+    .tag-java    { background: rgba(237,106,90,0.12); color: #ed6a5a; }
+
+    /* ── CARD BUTTONS ── */
+    .card-links { display: flex; gap: 10px; margin-top: 10px; }
+    .btn-card {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px; font-size: 0.82rem;
+      font-weight: 600; cursor: pointer; transition: all 0.2s;
+      border: 1.5px solid rgba(255,255,255,0.12); color: #ddd;
+      background: transparent;
+    }
+    .btn-card:hover { border-color: #ff6b35; color: #ff6b35; transform: translateY(-1px); }
+    .btn-card.primary { background: #ff6b35; border-color: #ff6b35; color: #fff; }
+    .btn-card.primary:hover { background: #e85a28; }
+
+    /* ── CONTACT ── */
+    #contact { background: #111; max-width: 100%; padding: 70px 5%; }
+    #contact .inner { max-width: 1100px; margin: 0 auto; }
+    #contact p { color: #bbb; margin-bottom: 24px; }
+    .contact-info { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 32px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 8px;
+      color: #aaa; font-size: 0.9rem; transition: color 0.2s;
+    }
+    .contact-item:hover { color: #ff6b35; }
+    form { display: flex; flex-direction: column; gap: 14px; max-width: 600px; }
+    form input, form textarea {
+      background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 12px 16px; color: #f0f0f0;
+      font-family: inherit; font-size: 0.9rem; transition: border-color 0.2s;
+    }
+    form input:focus, form textarea:focus { outline: none; border-color: #ff6b35; }
+    form input::placeholder, form textarea::placeholder { color: #555; }
+    form button {
+      background: #ff6b35; color: #fff; border: none;
+      padding: 12px 28px; border-radius: 8px; font-weight: 700;
+      font-size: 0.9rem; cursor: pointer; transition: 0.2s; width: fit-content;
+    }
+    form button:hover { background: #e85a28; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 28px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: #555; font-size: 0.85rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .project-grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 2rem; }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <!-- ── HEADER ── -->
+  <header>
+    <h1>Mandla Uday Kiran</h1>
+    <p class="tagline">Software Developer | Data Analyst | Python | SQL | Web Development</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<h1>Mandla Uday Kiran</h1>
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="inner">
+      <h2>About Me</h2>
+      <p>
+        Recent graduate passionate about building real-world software and data-driven solutions.
+        Skilled in Java, Python, SQL, HTML, CSS and JavaScript with experience developing
+        web applications and performing data analysis to extract meaningful insights.
+        Interested in software development and data analytics to solve real business problems.
+      </p>
+    </div>
+  </section>
 
-<p class="tagline">
-Software Developer | Data Analyst |  Python | SQL | Web Development
-</p>
+  <!-- ── SKILLS ── -->
+  <section id="skills">
+    <div class="inner">
+      <h2>Technical Skills</h2>
+      <div class="skills">
+        <div>Java</div>
+        <div>Python</div>
+        <div>SQL</div>
+        <div>HTML</div>
+        <div>CSS</div>
+        <div>JavaScript</div>
+        <div>MongoDB</div>
+        <div>Git</div>
+        <div>GitHub</div>
+        <div>Excel</div>
+        <div>Power BI</div>
+        <div>Tableau</div>
+      </div>
+    </div>
+  </section>
 
-<nav>
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-<a href="#contact">Contact</a>
-</nav>
+  <!-- ── PROJECTS ── -->
+  <section id="projects">
+    <div class="inner">
+      <h2>Projects</h2>
+      <div class="project-grid">
 
-</header>
+        <!-- SHOPSPHERE -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" alt="ShopSphere">
+          <div class="card-body">
+            <span class="card-badge">⭐ FEATURED</span>
+            <h3>ShopSphere</h3>
+            <p>A full-stack e-commerce platform with user authentication, product listings, shopping cart, wishlist, and an admin dashboard to manage orders and inventory.</p>
+            <div class="card-features">
+              <span>🛒 Cart & Wishlist</span>
+              <span>🔐 JWT Auth</span>
+              <span>📊 Admin Dashboard</span>
+              <span>🔍 Search & Filter</span>
+              <span>📱 Responsive</span>
+            </div>
+            <div class="tech-tags">
+              <span class="tag tag-react">React</span>
+              <span class="tag tag-node">Node.js</span>
+              <span class="tag tag-mongo">MongoDB</span>
+              <span class="tag tag-express">Express</span>
+              <span class="tag tag-jwt">JWT</span>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/udaykiran47136" target="_blank" class="btn-card primary">
+                🐙 GitHub
+              </a>
+              <a href="#" class="btn-card">🔗 Live Demo</a>
+            </div>
+          </div>
+        </div>
 
+        <!-- ZOMATO DASHBOARD -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" alt="Zomato Dashboard">
+          <div class="card-body">
+            <span class="card-badge">📊 DATA ANALYTICS</span>
+            <h3>Zomato Dashboard</h3>
+            <p>An interactive Power BI dashboard analyzing Zomato restaurant data — covering cuisine trends, city-wise ratings, price ranges, and customer satisfaction insights.</p>
+            <div class="card-features">
+              <span>📈 Trend Analysis</span>
+              <span>🗺️ City-wise Insights</span>
+              <span>⭐ Rating Analysis</span>
+              <span>💰 Price Segmentation</span>
+            </div>
+            <div class="tech-tags">
+              <span class="tag tag-powerbi">Power BI</span>
+              <span class="tag tag-sql">SQL</span>
+              <span class="tag tag-python">Python</span>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/udaykiran47136" target="_blank" class="btn-card primary">
+                🐙 GitHub
+              </a>
+            </div>
+          </div>
+        </div>
 
-<section id="about">
+        <!-- STUDENT MANAGEMENT -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800" alt="Student Management">
+          <div class="card-body">
+            <span class="card-badge">🐍 PYTHON + SQL</span>
+            <h3>Student Management System</h3>
+            <p>A desktop application built with Python and SQL for managing student records. Supports full CRUD operations — add, update, delete, and search students with a clean UI.</p>
+            <div class="card-features">
+              <span>➕ Add Records</span>
+              <span>✏️ Update & Delete</span>
+              <span>🔍 Search & Filter</span>
+              <span>🗄️ SQL Database</span>
+            </div>
+            <div class="tech-tags">
+              <span class="tag tag-python">Python</span>
+              <span class="tag tag-sql">SQL</span>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/udaykiran47136/Student-management-system" target="_blank" class="btn-card primary">
+                🐙 GitHub
+              </a>
+            </div>
+          </div>
+        </div>
 
-<h2>About Me</h2>
+        <!-- MALE FASHION ECOMMERCE -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800" alt="Male Fashion">
+          <div class="card-body">
+            <span class="card-badge">🛍️ WEB DEV</span>
+            <h3>Male Fashion Ecommerce</h3>
+            <p>A fully responsive men's fashion ecommerce website featuring product browsing, search functionality, shopping cart, and a clean modern UI built with HTML, CSS & JavaScript.</p>
+            <div class="card-features">
+              <span>🛒 Shopping Cart</span>
+              <span>🔍 Product Search</span>
+              <span>📱 Responsive Design</span>
+              <span>🎨 Modern UI</span>
+            </div>
+            <div class="tech-tags">
+              <span class="tag tag-html">HTML</span>
+              <span class="tag tag-css">CSS</span>
+              <span class="tag tag-js">JavaScript</span>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/udaykiran47136/Male-Fashions-" target="_blank" class="btn-card primary">
+                🐙 GitHub
+              </a>
+              <a href="#" class="btn-card">🔗 Live Demo</a>
+            </div>
+          </div>
+        </div>
 
-<p>
-Recent graduate passionate about building real-world software and data-driven solutions.
-Skilled in Java, Python, SQL, HTML, CSS and JavaScript with experience developing
-web applications and performing data analysis to extract meaningful insights.
-Interested in software development and data analytics to solve real business problems.
-</p>
+      </div>
+    </div>
+  </section>
 
-</section>
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="inner">
+      <h2>Contact Me</h2>
+      <p>If you would like to work together or have any questions, feel free to send me a message.</p>
 
+      <div class="contact-info">
+        <a href="mailto:udaykiran47136@gmail.com" class="contact-item">
+          📧 udaykiran47136@gmail.com
+        </a>
+        <a href="https://github.com/udaykiran47136" target="_blank" class="contact-item">
+          🐙 github.com/udaykiran47136
+        </a>
+        <a href="https://www.linkedin.com/in/uday-kiran-09662a2a1" target="_blank" class="contact-item">
+          💼 linkedin.com/in/udaykiran
+        </a>
+        <span class="contact-item">📍 India</span>
+      </div>
 
+      <form action="https://formsubmit.co/udaykiran47136@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message ✉️</button>
+      </form>
+    </div>
+  </section>
 
-<section id="skills">
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>© 2026 Mandla Uday Kiran | Portfolio</p>
+  </footer>
 
-<h2>Technical Skills</h2>
-
-<div class="skills">
-
-<div>Java</div>
-<div>Python</div>
-<div>SQL</div>
-<div>HTML</div>
-<div>CSS</div>
-<div>JavaScript</div>
-<div>MongoDB</div>
-<div>Git</div>
-<div>GitHub</div>
-<div>Excel</div>
-<div>Power BI</div>
-<div>Tableau</div>
-
-</div>
-
-</section>
-<section id="projects">
-<h2>Projects</h2>
-
-<div class="project-grid">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800">
-<h3>ShopSphere</h3>
-<p>Full-stack ecommerce app with authentication, cart, and product system.</p>
-<a href="https://github.com/udaykiran47136">GitHub</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800">
-<h3>Zomato Dashboard</h3>
-<p>Power BI dashboard analyzing restaurant trends and customer insights.</p>
-<a href="https://github.com/udaykiran47136">GitHub</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800">
-<h3>Student Management</h3>
-<p>Python + SQL system for managing records with CRUD operations.</p>
-<a href="https://github.com/udaykiran47136/Student-management-system">GitHub</a>
-</div>
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
-
-<h3>Male Fashion Ecommerce Website</h3>
-
-<p>
-Responsive ecommerce website with product search and cart functionality.
-</p>
-
-<a href="https://github.com/udaykiran47136/Male-Fashions-" target="_blank">
-
-<button>View GitHub</button>
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<section id="contact">
-
-<h2>Contact Me</h2>
-
-<p>If you would like to work together or have any questions, feel free to send me a message.</p>
-
-<form action="https://formsubmit.co/your-email@gmail.com" method="POST">
-
-<input type="text" name="name" placeholder="Your Name" required>
-
-<input type="email" name="email" placeholder="Your Email" required>
-
-<textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-
-<button type="submit">Send Message</button>
-
-</form>
-
-</section>
-
-<p>
-GitHub:
-<a href="https://github.com/udaykiran47136" target="_blank">
-github.com/udaykiran47136
-</a>
-</p>
-
-<p>Location: India</p>
-
-</section>
-
-<p>
-    LinkedIn:
-    <a href="https://www.linkedin.com/in/uday-kiran-09662a2a1?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">
-        linkedin.com/in/udaykiran/
- </a>       
-</p>
-
-<footer>
-
-<p>© 2026 Mandla Uday Kiran | Portfolio</p>
-
-</footer>
-
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
-
 </html>
